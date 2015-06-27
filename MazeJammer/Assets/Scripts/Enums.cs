@@ -18,3 +18,8 @@ public enum TrapState
     ACTIVE,
     RESETTING
 }
+
+public class StringConsts
+{
+    public const string PLAYER_TAG = "Player";
+}
