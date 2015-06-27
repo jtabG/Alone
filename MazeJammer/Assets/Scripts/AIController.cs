@@ -24,11 +24,11 @@ public class AIController : MonoBehaviour
             this.enabled = false;
         }
 
-        if (m_RunnerPrefab == null)
-        {
-            Debug.Log("missing prefab for runnerType");
-            this.enabled = false;
-        }
+        //if (m_RunnerPrefab == null)
+        //{
+        //    Debug.Log("missing prefab for runnerType");
+        //    this.enabled = false;
+        //}
 	}
 
     // maybe i dont need this...
