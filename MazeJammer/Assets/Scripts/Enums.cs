@@ -45,5 +45,8 @@ public class ConstValues
     public const int SUICIDE_SAM_MAX_COUNT = 3;
     public const float SUICIDE_SAM_RESET_TIME = 2.0F;
 
+    public const int FLOATY_FRED_MAX_COUNT = 1;
+    //public const float FLOATY_FRED_SIGHT_RANGE = 5.0F;
+
     #endregion
 }

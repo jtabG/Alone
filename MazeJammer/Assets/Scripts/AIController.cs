@@ -17,6 +17,18 @@ public class AIController : MonoBehaviour
 	void Start ()
     {
         m_AIs = new List<IAIBehaviour>();
+
+        if (m_FloaterPrefab == null)
+        {
+            Debug.Log("missing prefab for floaterType");
+            this.enabled = false;
+        }
+
+        if (m_RunnerPrefab == null)
+        {
+            Debug.Log("missing prefab for runnerType");
+            this.enabled = false;
+        }
 	}
 
     // maybe i dont need this...

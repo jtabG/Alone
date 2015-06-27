@@ -6,5 +6,5 @@ public interface IAIBehaviour
     void AssignPlayerReference(GameObject aPlayer);
     void Reset();
 
-    void Update();
+    void UpdateState();
 }
