@@ -9,6 +9,9 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private GameObject m_PlayerPrefab;
 
+    [SerializeField]
+    private CameraFollow m_CameraController;
+
     private GameObject m_ActivePlayer;
 
     void Start()
@@ -17,6 +20,11 @@ public class GameController : MonoBehaviour
         {
             m_ActivePlayer = Instantiate(m_PlayerPrefab);
             RespawnPlayer();
+
+            if (m_CameraController != null)
+            {
+                m_CameraController.SetTarget(m_ActivePlayer);
+            }
         }
     }
 
