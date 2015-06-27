@@ -10,25 +10,31 @@ public class AIController : MonoBehaviour
     [SerializeField]
     private GameObject m_RunnerPrefab;
 
-    private List<GameObject> m_AIs;
+    private List<IAIBehaviour> m_AIs;
     private GameController m_GameController;
 
 
 	void Start ()
     {
-        m_AIs = new List<GameObject>();
+        m_AIs = new List<IAIBehaviour>();
 	}
-	
-	void Update ()
-    {
-	    
-	}
+
+    // maybe i dont need this...
+	//void Update ()
+    //{
+    //    IEnumerator<IAIBehaviour> iter = m_AIs.GetEnumerator();
+    //
+    //    while (iter.MoveNext())
+    //    {
+    //        iter.Current.Update();
+    //    }
+	//}
 
     public void SpawnCreature(AIType aType, int aNum)
     {
         for (int i = 0 ; i < aNum ; ++i)
         {
-            GameObject gO;
+            GameObject gO = null;
 
             switch (aType)
             {
@@ -41,16 +47,22 @@ public class AIController : MonoBehaviour
                     break;
 
                 default:
-                    Debug.Log("BAD AITYPE, assigning RUNNER_TYPE");
-                    gO = Instantiate(m_RunnerPrefab);
-                    break;
+                    Debug.Log("BAD AITYPE, " + aType + ", creature not spawned");
+                    return;
             }
-
-            m_AIs.Add(gO);
 
             IAIBehaviour aIBehaviour = gO.GetComponent(typeof(IAIBehaviour)) as IAIBehaviour;
 
+            if (aIBehaviour == null)
+            {
+                Debug.Log("creature not spawned with IAIBehaviour interface");
+                return;
+            }
+
+            m_AIs.Add(aIBehaviour);
+            
             aIBehaviour.AssignPlayerReference(m_GameController.GetPlayerReference());
+            aIBehaviour.Reset();
         }
     }
 
