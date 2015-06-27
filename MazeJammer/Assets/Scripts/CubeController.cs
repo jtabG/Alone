@@ -17,7 +17,7 @@ public class CubeController : MonoBehaviour
 
     void OnTriggerEnter(Collider aCollider)
     {
-        if (aCollider.gameObject.CompareTag(StringConsts.PLAYER_TAG))
+        if (aCollider.gameObject.CompareTag(ConstValues.PLAYER_TAG))
         {
             Debug.Log("TRAP TRIGGERED");
             GameObject gO = aCollider.gameObject;

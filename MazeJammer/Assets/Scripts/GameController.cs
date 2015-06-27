@@ -12,7 +12,11 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private CameraFollow m_CameraController;
 
+    [SerializeField]
+    private AIController m_AIController;
+
     private GameObject m_ActivePlayer;
+
 
     void Start()
     {
@@ -26,7 +30,18 @@ public class GameController : MonoBehaviour
                 m_CameraController.SetTarget(m_ActivePlayer);
             }
         }
+
+        if (m_AIController == null)
+        {
+            m_AIController = GetComponent<AIController>();
+        }
+        
+        if (m_AIController != null)
+        {
+            m_AIController.GameController = this;
+        }
     }
+
 
     public void RespawnPlayer()
     {
@@ -36,4 +51,8 @@ public class GameController : MonoBehaviour
         m_ActivePlayer.transform.position = m_PlayerSpawnLocation.transform.position;
     }
 	
+    public GameObject GetPlayerReference()
+    {
+        return m_ActivePlayer;
+    }
 }
