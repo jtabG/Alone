@@ -9,7 +9,7 @@ public class CubeController : MonoBehaviour
 
     private TrapState m_TrapState = TrapState.IDLE;
 
-	// Use this for initialization
+
 	void Start ()
     {
 	
