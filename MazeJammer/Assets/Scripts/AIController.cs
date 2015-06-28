@@ -16,7 +16,10 @@ public class AIController : MonoBehaviour
 
 	void Start ()
     {
-        m_AIs = new List<IAIBehaviour>();
+        if (m_AIs == null)
+        {
+            m_AIs = new List<IAIBehaviour>();
+        }
 
         if (m_FloaterPrefab == null)
         {
@@ -24,11 +27,11 @@ public class AIController : MonoBehaviour
             this.enabled = false;
         }
 
-        //if (m_RunnerPrefab == null)
-        //{
-        //    Debug.Log("missing prefab for runnerType");
-        //    this.enabled = false;
-        //}
+        if (m_RunnerPrefab == null)
+        {
+            Debug.Log("missing prefab for runnerType");
+            this.enabled = false;
+        }
 	}
 
     // maybe i dont need this...
@@ -44,6 +47,11 @@ public class AIController : MonoBehaviour
 
     public void SpawnCreature(AIType aType, int aNum)
     {
+        if (m_AIs == null)
+        {
+            m_AIs = new List<IAIBehaviour>();
+        }
+        
         for (int i = 0 ; i < aNum ; ++i)
         {
             GameObject gO = null;
@@ -64,10 +72,16 @@ public class AIController : MonoBehaviour
             }
 
             IAIBehaviour aIBehaviour = gO.GetComponent(typeof(IAIBehaviour)) as IAIBehaviour;
-
+            //Object test = aIBehaviour as Object;
             if (aIBehaviour == null)
             {
                 Debug.Log("creature not spawned with IAIBehaviour interface");
+                return;
+            }
+
+            if (m_AIs == null)
+            {
+                Debug.Log("list null!?");
                 return;
             }
 
