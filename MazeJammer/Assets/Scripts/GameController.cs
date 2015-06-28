@@ -36,6 +36,11 @@ public class GameController : MonoBehaviour
             if (m_CameraController != null)
             {
                 m_CameraController.SetTarget(m_ActivePlayer);
+                PlayerController playerControl = m_ActivePlayer.GetComponent<PlayerController>();
+                if (playerControl != null)
+                {
+                    playerControl.GameController = this;
+                }
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour 
 {
@@ -7,6 +8,9 @@ public class PlayerController : MonoBehaviour
     float m_MovingTurnSpeed = 360;
     [SerializeField]
     float m_StationaryTurnSpeed = 180;
+
+    [SerializeField]
+    float m_RespawnTime = 1.0f;
 
     [SerializeField]
     private Animator m_Animator;
@@ -29,6 +33,7 @@ public class PlayerController : MonoBehaviour
     private bool m_Death = false;
     private bool m_FallDeath = false;
 
+    private GameController m_GameController;
 
 	void Start () 
     {
@@ -41,16 +46,6 @@ public class PlayerController : MonoBehaviour
         {
             m_Rigidbody = GetComponent<Rigidbody>();
         }
-        //if (Camera.main != null)
-        //{
-        //    m_Cam = Camera.main.transform;
-        //}
-        //else
-        //{
-        //    Debug.LogWarning(
-        //        "Warning: no main camera found. Third person character needs a Camera tagged \"MainCamera\", for camera-relative controls.");
-        //    // we use self-relative controls in this case, which probably isn't what the user wants, but hey, we warned them!
-        //}
         
         m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 	}
@@ -76,6 +71,21 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(0, m_RightMovement * m_StationaryTurnSpeed * Time.deltaTime, 0);
 
         updateAnimations();
+    }
+
+    IEnumerator<YieldInstruction> RespawnDelay(float aDuration)
+    {
+        float time = 0.0f;
+        while (time < aDuration)
+        {
+            time += Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
+        }
+
+        if (m_GameController != null)
+        {
+            m_GameController.RespawnPlayer();
+        }
     }
 
     void updateAnimations()
@@ -105,10 +115,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnDeath()
+    {
+        PlayAnimation(PlayerAnimation.DEATH, true);
+        StartCoroutine(RespawnDelay(m_RespawnTime));
+    }
+
     public void ResetAnimationState()
     {
         PlayAnimation(PlayerAnimation.COMMAND, false);
         PlayAnimation(PlayerAnimation.DEATH, false);
         PlayAnimation(PlayerAnimation.FALL, false);
+    }
+
+    public GameController GameController
+    {
+        set { m_GameController = value; }
     }
 }

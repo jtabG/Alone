@@ -73,6 +73,11 @@ public class PitfallTrapBehaviour : MonoBehaviour , ITrap
             if (gO.CompareTag(ConstValues.PLAYER_TAG))
             {
                 //TODO: Kill Player
+                PlayerController playerControl = gO.GetComponent<PlayerController>();
+                if (playerControl != null)
+                {
+                    playerControl.OnDeath();
+                }
                 m_State = TrapState.TRIGGERED;
             }
             else if (gO.CompareTag(ConstValues.AI_RUNNER_TAG))
