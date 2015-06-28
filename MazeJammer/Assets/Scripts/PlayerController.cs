@@ -88,15 +88,15 @@ public class PlayerController : MonoBehaviour
         switch (aAnimation)
         {
             case PlayerAnimation.COMMAND:
-                m_Animator.SetBool(ConstValues.PLAYER_ANIMATION_COMMAND, true);
+                m_Animator.SetBool(ConstValues.PLAYER_ANIMATION_COMMAND, aState);
                 break;
             
             case PlayerAnimation.DEATH:
-                m_Animator.SetBool(ConstValues.PLAYER_ANIMATION_DEATH, true);
+                m_Animator.SetBool(ConstValues.PLAYER_ANIMATION_DEATH, aState);
                 break;
             
             case PlayerAnimation.FALL:
-                m_Animator.SetBool(ConstValues.PLAYER_ANIMATION_FALL, true);
+                m_Animator.SetBool(ConstValues.PLAYER_ANIMATION_FALL, aState);
                 break;
             
             default:
