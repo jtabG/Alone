@@ -82,9 +82,14 @@ public class FireTrapBehaviour : MonoBehaviour , ITrap
                 //TODO: Kill Player
                 m_State = TrapState.TRIGGERED;
             }
-            else if (gO.CompareTag("Runner"))
+            else if (gO.CompareTag(ConstValues.AI_RUNNER_TAG))
             {
                 //TODO: Kill Runner
+                AIRunnerBehaviour aiBehav = gO.GetComponent<AIRunnerBehaviour>();
+                if (aiBehav != null)
+                {
+                    aiBehav.Kill();
+                }
                 m_State = TrapState.TRIGGERED;
             }
         }

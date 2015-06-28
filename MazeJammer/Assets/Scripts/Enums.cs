@@ -50,6 +50,8 @@ public class ConstValues
     public const string PLAYER_ANIMATION_DEATH = "Death";
     public const string PLAYER_ANIMATION_FALL = "FallDeath";
 
+
+    public const string AI_RUNNER_TAG = "Runner";
     #endregion
 
     #region NUMERICAL

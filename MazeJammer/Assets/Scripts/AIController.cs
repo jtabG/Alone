@@ -53,7 +53,20 @@ public class AIController : MonoBehaviour
 
     private bool SendMinion()
     {
-
+        IEnumerator<IAIBehaviour> iter = m_AIs.GetEnumerator();
+        
+        while (iter.MoveNext())
+        {
+            if (iter.Current.GetAIType() == AIType.SUICIDE_SAM)
+            {
+                if (iter.Current.GetState() == AIState.IDLE)
+                {
+                    AIRunnerBehaviour aiBehav = iter.Current as AIRunnerBehaviour;
+                    aiBehav.SendToTarget();
+                    return true;
+                }
+            }
+        }
         return false;
     }
 

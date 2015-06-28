@@ -69,11 +69,12 @@ public class AIRunnerBehaviour : MonoBehaviour, IAIBehaviour
     IEnumerator<YieldInstruction> MoveToTarget(GameObject aTarget)
     {
         float distanceSqrd = (aTarget.transform.position - transform.position).sqrMagnitude;
-
-        while (m_Activated && distanceSqrd < m_DistanceBuffer)
+        Debug.Log("Starting MoveToTarget coroutine, Active: " + m_Activated + " distance: " + distanceSqrd);
+        while (m_Activated && distanceSqrd > m_DistanceBuffer)
         {
             yield return new WaitForFixedUpdate();
             Vector3 direction = (aTarget.transform.position - transform.position);
+            direction.y = 0.0f;
             distanceSqrd = direction.sqrMagnitude;
 
             moveTowardsDirection(direction);
@@ -85,8 +86,9 @@ public class AIRunnerBehaviour : MonoBehaviour, IAIBehaviour
         Vector3 direction = aTargetDireciton.normalized;
         transform.forward = Vector3.Lerp(transform.forward, direction, m_MoveSpeed * 0.5f);
 
-        Vector3 targetPosition = transform.position + (direction * m_MoveSpeed * Time.fixedDeltaTime);
+        Vector3 targetPosition = transform.position + (direction * m_MoveSpeed);
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.fixedDeltaTime * m_MoveSpeed);
+        //Debug.Log("moving, targetPos: " + targetPosition);
     }
 
     private GameObject FindTarget()
@@ -139,6 +141,8 @@ public class AIRunnerBehaviour : MonoBehaviour, IAIBehaviour
             return;
         }
 
+        m_Activated = true;
+        m_State = AIState.ACTIVE;
         StartCoroutine(MoveToTarget(m_Target));
     }
 
@@ -166,4 +170,17 @@ public class AIRunnerBehaviour : MonoBehaviour, IAIBehaviour
     }
     #endregion
 
+    void OnDrawGizmos()
+    {
+        Vector3 pos = transform.position + transform.rotation * (transform.forward * (m_DetectionRange));
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(transform.position, pos);
+
+        pos = transform.position + transform.rotation * (transform.right * (m_DetectionRange));
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, pos);
+
+    }
 }
