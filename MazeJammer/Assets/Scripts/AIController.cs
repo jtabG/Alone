@@ -34,16 +34,28 @@ public class AIController : MonoBehaviour
         }
 	}
 
-    // maybe i dont need this...
-	//void Update ()
-    //{
-    //    IEnumerator<IAIBehaviour> iter = m_AIs.GetEnumerator();
-    //
-    //    while (iter.MoveNext())
-    //    {
-    //        iter.Current.Update();
-    //    }
-	//}
+	void Update ()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("Space pressed");
+            
+            if (SendMinion())
+            {
+                Debug.Log("Minion successfully send");
+            }
+            else
+            {
+                Debug.Log("Could not send minion");
+            }
+        }
+	}
+
+    private bool SendMinion()
+    {
+
+        return false;
+    }
 
     public void SpawnCreature(AIType aType, int aNum)
     {

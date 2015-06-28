@@ -103,12 +103,16 @@ public class AIRunnerBehaviour : MonoBehaviour, IAIBehaviour
             ITrap foundTrap = hitColliders[i].GetComponent(typeof(ITrap)) as ITrap;
             if (foundTrap != null)
             {
-                //float distanceToTrap = (foundTrap - transform.position).sqrMagnitude;
+                float distanceToTrap = (foundTrap.GetWorldPosition() - transform.position).sqrMagnitude;
+
+                if (distanceToTrap < distanceToClosestTrap)
+                {
+                    distanceToClosestTrap = distanceToTrap;
+                    foundObject = hitColliders[i].gameObject;
+                }
             }
             i++;
         }
-
-
 
         return foundObject;
     }
@@ -131,6 +135,7 @@ public class AIRunnerBehaviour : MonoBehaviour, IAIBehaviour
         if (m_Target == null)
         {
             m_State = AIState.IDLE;
+            Debug.Log("No Traps in range");
             return;
         }
 
