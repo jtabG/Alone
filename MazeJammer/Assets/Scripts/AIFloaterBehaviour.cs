@@ -81,6 +81,7 @@ public class AIFloaterBehaviour : MonoBehaviour, IAIBehaviour
         m_Player = aPlayer;
     }
 
+    #region IAIBEHAVIOUR
     public void Reset()
     {
         transform.position = m_Player.transform.position + (m_Player.transform.right * m_DistanceFromPlayer);
@@ -91,4 +92,16 @@ public class AIFloaterBehaviour : MonoBehaviour, IAIBehaviour
     {
 
     }
+
+    public AIType GetAIType()
+    {
+        return AIType.FLOATY_FRED;
+    }
+
+    public AIState GetState()
+    {
+        return AIState.ACTIVE;
+    }
+    #endregion
+
 }
