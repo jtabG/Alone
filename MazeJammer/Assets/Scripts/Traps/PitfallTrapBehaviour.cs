@@ -102,4 +102,10 @@ public class PitfallTrapBehaviour : MonoBehaviour , ITrap
     {
         m_Renderer.material = m_Mat2;
     }
+
+
+    public Vector3 GetWorldPosition()
+    {
+        return transform.position;
+    }
 }
