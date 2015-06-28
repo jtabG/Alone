@@ -2,14 +2,17 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class BackToStartMenu : MonoBehaviour {
+public class BackToStartMenu : MonoBehaviour 
+{
 
-	
+    [SerializeField]
+    private string m_PreviousLevel;
+
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.Escape)) 
 		{
-			Application.LoadLevel (0);
+			Application.LoadLevel (m_PreviousLevel);
 		}
 	}
 }

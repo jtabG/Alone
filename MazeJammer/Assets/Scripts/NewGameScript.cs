@@ -37,8 +37,14 @@ public class NewGameScript : MonoBehaviour {
 		Application.LoadLevel (HowToPlay);
 	}
 
+    public void onLeaderboardButtonClick()
+    {
+        Application.LoadLevel(Leaderboard);
+    }
+
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+    {
 		if (Input.GetKeyDown(KeyCode.Escape)) 
 		{
 			Application.LoadLevel (PauseMenu);
