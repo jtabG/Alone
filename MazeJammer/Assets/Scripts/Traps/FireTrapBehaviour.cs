@@ -5,24 +5,42 @@ public class FireTrapBehaviour : MonoBehaviour , ITrap
 {
     private TrapState m_State = TrapState.IDLE;
 
+    private Renderer m_Renderer;
+    [SerializeField]
+    private Material m_Mat1;
+    [SerializeField]
+    private Material m_Mat2;
+
     [SerializeField]
     private float m_ResetTimer = 3.0f;
     private float m_Timer = 0.0f;
+    private float m_DetectedTimer = 0.0f;
 
     [SerializeField]
     private GameObject m_FireParticles;
+
+    private bool m_IsDetected = false;
 
 	void Start ()
     {
         m_FireParticles = transform.GetChild(0).gameObject;
         m_FireParticles.SetActive(false);
         m_Timer = m_ResetTimer;
+        m_DetectedTimer = m_ResetTimer;
+        m_Renderer = transform.parent.GetComponent<Renderer>();
 	}
 	
-
 	void Update () 
     {
         checkState();
+        m_DetectedTimer -= Time.deltaTime;
+        //m_Renderer.material.Lerp(m_Mat1, m_Mat2, Time.deltaTime);
+        if (m_DetectedTimer <= 0.0f)
+        {
+            m_IsDetected = false;
+            m_DetectedTimer = m_ResetTimer;
+            m_Renderer.material = m_Mat1;
+        }
 	}
 
     void checkState()
@@ -39,14 +57,13 @@ public class FireTrapBehaviour : MonoBehaviour , ITrap
                 }                
                 break;
             case TrapState.DISABLED:
-                // Fire trap will never be disabled
                 break;
             case TrapState.IDLE:
-                // waiting for trigger
                 break;
             case TrapState.RESETTING:
                 m_Timer = m_ResetTimer;
                 m_State = TrapState.IDLE;
+                m_DetectedTimer = m_ResetTimer;
                 break;
             case TrapState.TRIGGERED:
                 m_State = TrapState.ACTIVE;
@@ -74,11 +91,21 @@ public class FireTrapBehaviour : MonoBehaviour , ITrap
 
     public void TrapDetected()
     {
-        Debug.Log("Fire Trap Detected");
+        m_DetectedTimer = m_ResetTimer;
+        if (!m_IsDetected)
+        {
+            m_IsDetected = true;
+            detected();
+        }
     }
 
     public void ResetTraps()
     {
         m_State = TrapState.RESETTING;
+    }
+
+    void detected()
+    {
+        m_Renderer.material = m_Mat2;
     }
 }

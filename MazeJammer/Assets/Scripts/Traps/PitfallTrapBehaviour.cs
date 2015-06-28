@@ -64,7 +64,7 @@ public class PitfallTrapBehaviour : MonoBehaviour , ITrap
 
     public void TrapDetected()
     {
-        Debug.Log("Pitfall Trap Detected");
+        //Debug.Log("Pitfall Trap Detected");
     }
 
     public void ResetTraps()

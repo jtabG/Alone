@@ -79,7 +79,6 @@ public class SpikeTrapBehaviour : MonoBehaviour, ITrap
         {
             if (m_Spikes.transform.position.y > 0.0f)
             {
-                Debug.Log("Lowering");
                 m_Spikes.transform.position = m_Spikes.transform.position + m_Decrement;
             }
         }
@@ -105,7 +104,7 @@ public class SpikeTrapBehaviour : MonoBehaviour, ITrap
 
     public void TrapDetected()
     {
-        Debug.Log("Spike Trap Detected!!");
+       // Debug.Log("Spike Trap Detected!!");
     }
 
     public void ResetTraps()
