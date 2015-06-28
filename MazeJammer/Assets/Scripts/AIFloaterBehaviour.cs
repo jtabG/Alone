@@ -9,6 +9,9 @@ public class AIFloaterBehaviour : MonoBehaviour, IAIBehaviour
     private float m_MoveSpeed = 2.0f;
 
     [SerializeField]
+    private float m_DetectionRange = 2.0f;
+
+    [SerializeField]
     private float m_yOffset = 0.5f;
 
     [SerializeField]
@@ -30,6 +33,8 @@ public class AIFloaterBehaviour : MonoBehaviour, IAIBehaviour
 
     private void UpdatePostionRotation()
     {
+        if (m_Player == null) { return; }
+        
         Vector3 targetPosition = m_Player.transform.position;
         targetPosition.y += m_yOffset + (Mathf.Sin(Time.time));
 
@@ -49,7 +54,20 @@ public class AIFloaterBehaviour : MonoBehaviour, IAIBehaviour
 
     private void CheckForTraps()
     {
-
+        Vector3 checkPoint = transform.position;
+        checkPoint.y = 0.5f;
+        Collider[] hitColliders = Physics.OverlapSphere(checkPoint, m_DetectionRange);
+        int i = 0;
+        
+        while (i < hitColliders.Length)
+        {
+            
+            //if (hitColliders[i].GetComponent(typeof()))
+            
+                
+                
+            i++;
+        }
     }
 
 
