@@ -5,22 +5,20 @@ using System.Collections.Generic;
 
 public class GameStats : MonoBehaviour 
 {
-    private void ReadStatistics()
+    public void ReadStatistics()
     {
         BrainCloudWrapper.GetBC().PlayerStatisticsService.ReadAllPlayerStats(StatsSuccess_Callback, StatsFailure_Callback, null);
     }
 
-    private void SaveStatisticsToBrainCloud()
+    public void SaveStatisticsToBrainCloud()
     {
         Dictionary<string, object> stats = new Dictionary<string, object>{
-            {"timeToCompleteLevel1", m_Level1.TimeToCompleteLevel},
+            {"timeToCompleteLevel1", m_Level1.BestTimeToCompleteLevel},
             {"totalNumberDeaths", m_TotalDeaths},
             {"numberDeathsLevel1", m_Level1.NumberDeaths}
         };
 
         BrainCloudWrapper.GetBC().PlayerStatisticsService.IncrementPlayerStats(stats, StatsSuccess_Callback, StatsFailure_Callback, null);
-
-        //brainCloudstatusText
     }
 
     private void StatsSuccess_Callback(string responseData, object cbObject)
@@ -28,9 +26,11 @@ public class GameStats : MonoBehaviour
         JsonData jsonData = JsonMapper.ToObject(responseData);
         JsonData entries = jsonData["data"]["statistics"];
 
-        m_Level1.TimeToCompleteLevel = int.Parse(entries["timeToCompleteLevel1"].ToString());
+        m_Level1.BestTimeToCompleteLevel = float.Parse(entries["timeToCompleteLevel1"].ToString());
         m_Level1.NumberDeaths = int.Parse(entries["numberDeathsLevel1"].ToString());
-        m_TotalDeaths = int.Parse(entries["totalNumberDeaths"].ToString());      
+        m_TotalDeaths = int.Parse(entries["totalNumberDeaths"].ToString());
+
+        Debug.Log(m_TotalDeaths);
     }
 
     private void StatsFailure_Callback(int statusCode, int reasonCode, string statusMessage, object cbObject)
@@ -74,7 +74,7 @@ public class GameStats : MonoBehaviour
     private levelStats m_Level2;
     private levelStats m_Level3;
 
-    private int m_TotalDeaths;
+    private int m_TotalDeaths = 0;
     public int TotalDeaths
     {
         get { return m_TotalDeaths; }
