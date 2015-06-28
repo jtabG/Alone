@@ -17,6 +17,7 @@ public class AIRunnerBehaviour : MonoBehaviour, IAIBehaviour
 
     private GameObject m_Target;
     private bool m_Activated;
+    private bool m_IsMoving;
 
     [SerializeField]
     private float m_RespawnTime;
@@ -41,16 +42,24 @@ public class AIRunnerBehaviour : MonoBehaviour, IAIBehaviour
 
         Vector3 distanceToPlayer = m_Player.transform.position - transform.position;
 
-        if (distanceToPlayer.sqrMagnitude < m_DistanceFromPlayer * m_DistanceFromPlayer)
+        if (!m_IsMoving && distanceToPlayer.sqrMagnitude < m_DistanceFromPlayer * m_DistanceFromPlayer)
         {
             return;
         }
+
+        m_IsMoving = true;
 
         Vector3 direction = distanceToPlayer.normalized;
         transform.forward = Vector3.Lerp(transform.forward, direction, m_MoveSpeed * 0.5f);
 
         Vector3 targetPosition = m_Player.transform.position + (direction * m_DistanceFromPlayer);
-        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * m_MoveSpeed);
+        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * m_MoveSpeed * 0.5f);
+
+        distanceToPlayer = m_Player.transform.position - transform.position;
+        if (distanceToPlayer.sqrMagnitude < m_DistanceFromPlayer)
+        {
+            m_IsMoving = false;
+        }
 	}
 
     IEnumerator<YieldInstruction> RespawnDelay(float aDuration)
@@ -158,6 +167,7 @@ public class AIRunnerBehaviour : MonoBehaviour, IAIBehaviour
     {
         transform.position = m_Player.transform.position + (-m_Player.transform.forward * m_DistanceFromPlayer);
         m_Activated = false;
+        m_IsMoving = false;
         m_State = AIState.IDLE;
     }
 
