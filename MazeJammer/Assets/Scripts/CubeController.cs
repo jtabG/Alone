@@ -7,7 +7,7 @@ public class CubeController : MonoBehaviour
     [SerializeField]
     private TrapType m_TrapType = TrapType.NONE;
 
-    private TrapState m_TrapState = TrapState.IDLE;
+    //private TrapState m_TrapState = TrapState.IDLE;
 
 
 	void Start ()
