@@ -112,12 +112,9 @@ public class GameStats : MonoBehaviour
 
     void Start()
     {
-        m_Level1 = new levelStats();
-        Debug.Log("ahhh");
         if (m_Level1 == null)
         {
             m_Level1 = new levelStats();
-            Debug.Log("not null bitch");
         }
         if (m_Level2 == null)
         {
