@@ -67,9 +67,9 @@ public class PlayerController : MonoBehaviour
         m_ForwardMovement = Input.GetAxis("Vertical");
         m_RightMovement = Input.GetAxis("Horizontal");
 
-        m_ForwardMovement *= m_Speed;
-        
-        m_Rigidbody.AddForce(transform.forward * m_ForwardMovement, ForceMode.Acceleration);
+        float forwardMotion = m_ForwardMovement * (m_ForwardMovement > 0 ? (m_Speed + m_Speed) : (m_Speed));
+
+        m_Rigidbody.AddForce(transform.forward * forwardMotion, ForceMode.Acceleration);
 
 
         //// calculate move direction to pass to character
@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
 
     void updateAnimations()
     {
-
+        m_Animator.SetFloat("Forward", m_ForwardMovement + m_ForwardMovement);
     }
 
 
