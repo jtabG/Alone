@@ -29,8 +29,6 @@ public class GameStats : MonoBehaviour
         m_Level1.BestTimeToCompleteLevel = float.Parse(entries["timeToCompleteLevel1"].ToString());
         m_Level1.NumberDeaths = int.Parse(entries["numberDeathsLevel1"].ToString());
         m_TotalDeaths = int.Parse(entries["totalNumberDeaths"].ToString());
-
-        Debug.Log(m_TotalDeaths);
     }
 
     private void StatsFailure_Callback(int statusCode, int reasonCode, string statusMessage, object cbObject)

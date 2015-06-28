@@ -5,7 +5,11 @@ using UnityEngine.UI;
 public class GameUIText : MonoBehaviour 
 {
     [SerializeField]
-    private Text m_DisplayText;
+    private Text m_LevelText;
+    [SerializeField]
+    private Text m_DeathCounterText;
+    [SerializeField]
+    private Text m_TimerText;
 
     [SerializeField]
     private GameController m_GameManager;
@@ -14,7 +18,7 @@ public class GameUIText : MonoBehaviour
 
 	void Start () 
     {
-        m_DisplayText = GetComponent<Text>();
+       
         m_GameManager = GameObject.Find("GameManager").GetComponent<GameController>();
 	}
 
