@@ -20,8 +20,7 @@ public class CubeController : MonoBehaviour
         if (aCollider.gameObject.CompareTag(ConstValues.PLAYER_TAG))
         {
             Debug.Log("TRAP TRIGGERED");
-            GameObject gO = aCollider.gameObject;
-            aCollider.isTrigger = true; //this works for the pitfall
+            //aCollider.isTrigger = true; //this works for the pitfall
         }
     }
 }

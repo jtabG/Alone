@@ -12,11 +12,11 @@ public enum TrapType
 
 public enum TrapState
 {
-    DISABLED,
-    IDLE,
-    TRIGGERED,
-    ACTIVE,
-    RESETTING
+    DISABLED, // unable to be activated
+    IDLE, // able to be activated
+    TRIGGERED, // activated
+    ACTIVE, // do active thing
+    RESETTING // reset trap
 }
 
 public enum AIType
