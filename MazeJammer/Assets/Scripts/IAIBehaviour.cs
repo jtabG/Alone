@@ -7,4 +7,7 @@ public interface IAIBehaviour
     void Reset();
 
     void UpdateState();
+
+    AIType GetAIType();
+    AIState GetState();
 }
