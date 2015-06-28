@@ -8,7 +8,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float m_StationaryTurnSpeed = 180;
 
+    [SerializeField]
     private Animator m_Animator;
+    [SerializeField]
     private Rigidbody m_Rigidbody;
 
     private Transform m_Cam;
@@ -18,6 +20,7 @@ public class PlayerController : MonoBehaviour
 
     private float m_ForwardMovement = 0.0f;
     private float m_RightMovement = 0.0f;
+    [SerializeField]
     private float m_Speed = 0.1f;
     private float m_TurnAmount = 0.0f;
     private Vector3 m_GroundNormal;
@@ -29,19 +32,25 @@ public class PlayerController : MonoBehaviour
 
 	void Start () 
     {
-        m_Animator = GetComponent<Animator>();
-        m_Rigidbody = GetComponent<Rigidbody>();
+        if (m_Animator == null)
+        {
+            m_Animator = GetComponent<Animator>();
+        }
 
-        if (Camera.main != null)
+        if (m_Rigidbody == null)
         {
-            m_Cam = Camera.main.transform;
+            m_Rigidbody = GetComponent<Rigidbody>();
         }
-        else
-        {
-            Debug.LogWarning(
-                "Warning: no main camera found. Third person character needs a Camera tagged \"MainCamera\", for camera-relative controls.");
-            // we use self-relative controls in this case, which probably isn't what the user wants, but hey, we warned them!
-        }
+        //if (Camera.main != null)
+        //{
+        //    m_Cam = Camera.main.transform;
+        //}
+        //else
+        //{
+        //    Debug.LogWarning(
+        //        "Warning: no main camera found. Third person character needs a Camera tagged \"MainCamera\", for camera-relative controls.");
+        //    // we use self-relative controls in this case, which probably isn't what the user wants, but hey, we warned them!
+        //}
         
         m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 	}
@@ -58,30 +67,37 @@ public class PlayerController : MonoBehaviour
         m_ForwardMovement = Input.GetAxis("Vertical");
         m_RightMovement = Input.GetAxis("Horizontal");
 
-        // calculate move direction to pass to character
-        if (m_Cam != null)
-        {
-            // calculate camera relative direction to move:
-            m_CamForward = Vector3.Scale(m_Cam.forward, new Vector3(1, 0, 1)).normalized;
-            m_LocalVelocity = m_ForwardMovement * m_CamForward + m_RightMovement * m_Cam.right;
-        }
-        else
-        {
-            // we use world-relative directions in the case of no main camera
-            m_LocalVelocity = m_ForwardMovement * Vector3.forward + m_RightMovement * Vector3.right;
-        }
-
-        if (m_LocalVelocity.magnitude > 1.0f)
-        {
-            m_LocalVelocity.Normalize();
-        }
-        m_LocalVelocity = transform.InverseTransformDirection(m_LocalVelocity);    
-        m_LocalVelocity = Vector3.ProjectOnPlane(m_LocalVelocity, m_GroundNormal);
-        m_TurnAmount = Mathf.Atan2(m_LocalVelocity.x, m_LocalVelocity.z);
-        checkGroundStatus();
-        applyExtraTurnRotation();
-
+        m_ForwardMovement *= m_Speed;
         
+        m_Rigidbody.AddForce(transform.forward * m_ForwardMovement, ForceMode.Acceleration);
+
+
+        //// calculate move direction to pass to character
+        //if (m_Cam != null)
+        //{
+        //    // calculate camera relative direction to move:
+        //    m_CamForward = Vector3.Scale(m_Cam.forward, new Vector3(1, 0, 1)).normalized;
+        //    m_LocalVelocity = m_ForwardMovement * m_CamForward + m_RightMovement * m_Cam.right;
+        //}
+        //else
+        //{
+        //    // we use world-relative directions in the case of no main camera
+        //    m_LocalVelocity = m_ForwardMovement * Vector3.forward + m_RightMovement * Vector3.right;
+        //}
+        //
+        //if (m_LocalVelocity.magnitude > 1.0f)
+        //{
+        //    m_LocalVelocity.Normalize();
+        //}
+        //m_LocalVelocity = transform.InverseTransformDirection(m_LocalVelocity);    
+        //m_LocalVelocity = Vector3.ProjectOnPlane(m_LocalVelocity, m_GroundNormal);
+        //m_TurnAmount = Mathf.Atan2(m_LocalVelocity.x, m_LocalVelocity.z);
+        //checkGroundStatus();
+        //applyExtraTurnRotation();
+        
+        
+        // rotation
+        transform.Rotate(0, m_RightMovement * m_StationaryTurnSpeed * Time.deltaTime, 0);
 
         updateAnimations();
     }
@@ -90,6 +106,7 @@ public class PlayerController : MonoBehaviour
     {
 
     }
+
 
     void applyExtraTurnRotation()
     {
