@@ -6,16 +6,37 @@ public class PitfallTrapBehaviour : MonoBehaviour , ITrap
     [SerializeField]
     private TrapState m_State = TrapState.IDLE;
 
+    private Renderer m_Renderer;
+    [SerializeField]
+    private Material m_Mat1;
+    [SerializeField]
+    private Material m_Mat2;
+    private float m_DetectedTimer = 0.0f;
+
+    private float m_ResetTimer = 3.0f;
+
     private GameObject m_Parent;
+
+    private bool m_IsDetected = false;
 
 	void Start () 
     {
-        m_Parent = transform.parent.gameObject;    
+        m_Parent = transform.parent.gameObject;
+        m_Renderer = m_Parent.GetComponent<Renderer>();
+        m_Renderer.material = m_Mat1;
 	}
 	
 	void Update () 
     {
         checkState();
+        m_DetectedTimer -= Time.deltaTime;
+        //m_Renderer.material.Lerp(m_Mat1, m_Mat2, Time.deltaTime);
+        if (m_DetectedTimer <= 0.0f)
+        {
+            m_IsDetected = false;
+            m_DetectedTimer = m_ResetTimer;
+            m_Renderer.material = m_Mat1;
+        }
 	}
 
     void checkState()
@@ -62,13 +83,23 @@ public class PitfallTrapBehaviour : MonoBehaviour , ITrap
         }
     }
 
-    public void TrapDetected()
-    {
-        //Debug.Log("Pitfall Trap Detected");
-    }
-
     public void ResetTraps()
     {
         m_State = TrapState.RESETTING;
+    }
+
+    public void TrapDetected()
+    {
+        m_DetectedTimer = m_ResetTimer;
+        if (!m_IsDetected)
+        {
+            m_IsDetected = true;
+            detected();
+        }
+    }
+
+    void detected()
+    {
+        m_Renderer.material = m_Mat2;
     }
 }

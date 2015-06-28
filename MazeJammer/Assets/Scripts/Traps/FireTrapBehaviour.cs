@@ -10,11 +10,11 @@ public class FireTrapBehaviour : MonoBehaviour , ITrap
     private Material m_Mat1;
     [SerializeField]
     private Material m_Mat2;
+    private float m_DetectedTimer = 0.0f;
 
     [SerializeField]
     private float m_ResetTimer = 3.0f;
-    private float m_Timer = 0.0f;
-    private float m_DetectedTimer = 0.0f;
+    private float m_Timer = 0.0f;    
 
     [SerializeField]
     private GameObject m_FireParticles;
@@ -28,6 +28,7 @@ public class FireTrapBehaviour : MonoBehaviour , ITrap
         m_Timer = m_ResetTimer;
         m_DetectedTimer = m_ResetTimer;
         m_Renderer = transform.parent.GetComponent<Renderer>();
+        m_Renderer.material = m_Mat1;
 	}
 	
 	void Update () 
@@ -89,6 +90,11 @@ public class FireTrapBehaviour : MonoBehaviour , ITrap
         }
     }
 
+    public void ResetTraps()
+    {
+        m_State = TrapState.RESETTING;
+    }
+
     public void TrapDetected()
     {
         m_DetectedTimer = m_ResetTimer;
@@ -97,12 +103,7 @@ public class FireTrapBehaviour : MonoBehaviour , ITrap
             m_IsDetected = true;
             detected();
         }
-    }
-
-    public void ResetTraps()
-    {
-        m_State = TrapState.RESETTING;
-    }
+    } 
 
     void detected()
     {

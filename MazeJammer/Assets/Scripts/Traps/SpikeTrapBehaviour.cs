@@ -5,6 +5,13 @@ public class SpikeTrapBehaviour : MonoBehaviour, ITrap
 {
     private TrapState m_State = TrapState.IDLE;
 
+    private Renderer m_Renderer;
+    [SerializeField]
+    private Material m_Mat1;
+    [SerializeField]
+    private Material m_Mat2;
+    private float m_DetectedTimer = 0.0f;
+
     private Vector3 m_StartPos;
     private Vector3 m_EndPos;
 
@@ -13,7 +20,8 @@ public class SpikeTrapBehaviour : MonoBehaviour, ITrap
     private float m_Timer = 0.0f;
     private float m_ResetTimer = 3.0f;
     private Vector3 m_Increment;
-    private Vector3 m_Decrement;
+
+    private bool m_IsDetected = false;
 
 	void Start () 
     {
@@ -22,12 +30,21 @@ public class SpikeTrapBehaviour : MonoBehaviour, ITrap
         m_Spikes = transform.GetChild(0).gameObject;
         m_Timer = m_ResetTimer;
         m_Increment = new Vector3(0.0f, 0.1f, 0.0f);
-        m_Decrement = new Vector3(0.0f, -0.1f, 0.0f);
+        m_Renderer = transform.parent.GetComponent<Renderer>();
+        m_Renderer.material = m_Mat1;
 	}
 	
 	void Update () 
     {
         checkState();
+        m_DetectedTimer -= Time.deltaTime;
+        //m_Renderer.material.Lerp(m_Mat1, m_Mat2, Time.deltaTime);
+        if (m_DetectedTimer <= 0.0f)
+        {
+            m_IsDetected = false;
+            m_DetectedTimer = m_ResetTimer;
+            m_Renderer.material = m_Mat1;
+        }
 	}
 
     void checkState()
@@ -79,7 +96,7 @@ public class SpikeTrapBehaviour : MonoBehaviour, ITrap
         {
             if (m_Spikes.transform.position.y > 0.0f)
             {
-                m_Spikes.transform.position = m_Spikes.transform.position + m_Decrement;
+                m_Spikes.transform.position = m_Spikes.transform.position - m_Increment;
             }
         }
     }
@@ -102,13 +119,23 @@ public class SpikeTrapBehaviour : MonoBehaviour, ITrap
         }
     }
 
-    public void TrapDetected()
-    {
-       // Debug.Log("Spike Trap Detected!!");
-    }
-
     public void ResetTraps()
     {
         m_State = TrapState.RESETTING;
+    }
+
+    public void TrapDetected()
+    {
+        m_DetectedTimer = m_ResetTimer;
+        if (!m_IsDetected)
+        {
+            m_IsDetected = true;
+            detected();
+        }
+    }
+
+    void detected()
+    {
+        m_Renderer.material = m_Mat2;
     }
 }
