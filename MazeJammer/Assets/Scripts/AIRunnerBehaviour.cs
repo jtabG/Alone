@@ -53,7 +53,7 @@ public class AIRunnerBehaviour : MonoBehaviour, IAIBehaviour
         transform.forward = Vector3.Lerp(transform.forward, direction, m_MoveSpeed * 0.5f);
 
         Vector3 targetPosition = m_Player.transform.position + (direction * m_DistanceFromPlayer);
-        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * m_MoveSpeed * 0.5f);
+        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * m_MoveSpeed * 0.25f);
 
         distanceToPlayer = m_Player.transform.position - transform.position;
         if (distanceToPlayer.sqrMagnitude < m_DistanceFromPlayer)
