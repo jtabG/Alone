@@ -34,10 +34,21 @@ public enum AIState
     RESETTING
 }
 
+public enum PlayerAnimation
+{
+    COMMAND,
+    DEATH,
+    FALL
+}
+
 public class ConstValues
 {
     #region STRINGS
     public const string PLAYER_TAG = "Player";
+    public const string PLAYER_ANIMATION_MOVEMENT = "Forward";
+    public const string PLAYER_ANIMATION_COMMAND = "Command";
+    public const string PLAYER_ANIMATION_DEATH = "Death";
+    public const string PLAYER_ANIMATION_FALL = "FallDeath";
 
     #endregion
 

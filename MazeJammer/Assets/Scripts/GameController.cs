@@ -54,6 +54,13 @@ public class GameController : MonoBehaviour
         if (m_PlayerSpawnLocation == null) { return; }
 
         m_ActivePlayer.transform.position = m_PlayerSpawnLocation.transform.position;
+
+        //reset animation
+        PlayerController playerControl = m_ActivePlayer.GetComponent<PlayerController>();
+        if (playerControl != null)
+        {
+            playerControl.ResetAnimationState();
+        }
     }
 	
     public GameObject GetPlayerReference()

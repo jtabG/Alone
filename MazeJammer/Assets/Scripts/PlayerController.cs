@@ -72,30 +72,6 @@ public class PlayerController : MonoBehaviour
         m_Rigidbody.AddForce(transform.forward * forwardMotion, ForceMode.Acceleration);
 
 
-        //// calculate move direction to pass to character
-        //if (m_Cam != null)
-        //{
-        //    // calculate camera relative direction to move:
-        //    m_CamForward = Vector3.Scale(m_Cam.forward, new Vector3(1, 0, 1)).normalized;
-        //    m_LocalVelocity = m_ForwardMovement * m_CamForward + m_RightMovement * m_Cam.right;
-        //}
-        //else
-        //{
-        //    // we use world-relative directions in the case of no main camera
-        //    m_LocalVelocity = m_ForwardMovement * Vector3.forward + m_RightMovement * Vector3.right;
-        //}
-        //
-        //if (m_LocalVelocity.magnitude > 1.0f)
-        //{
-        //    m_LocalVelocity.Normalize();
-        //}
-        //m_LocalVelocity = transform.InverseTransformDirection(m_LocalVelocity);    
-        //m_LocalVelocity = Vector3.ProjectOnPlane(m_LocalVelocity, m_GroundNormal);
-        //m_TurnAmount = Mathf.Atan2(m_LocalVelocity.x, m_LocalVelocity.z);
-        //checkGroundStatus();
-        //applyExtraTurnRotation();
-        
-        
         // rotation
         transform.Rotate(0, m_RightMovement * m_StationaryTurnSpeed * Time.deltaTime, 0);
 
@@ -104,24 +80,35 @@ public class PlayerController : MonoBehaviour
 
     void updateAnimations()
     {
-        m_Animator.SetFloat("Forward", m_ForwardMovement + m_ForwardMovement);
+        m_Animator.SetFloat(ConstValues.PLAYER_ANIMATION_MOVEMENT, m_ForwardMovement + m_ForwardMovement);
     }
 
-
-    void applyExtraTurnRotation()
+    public void PlayAnimation(PlayerAnimation aAnimation, bool aState = true)
     {
-        // help the character turn faster (this is in addition to root rotation in the animation)
-        float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, m_LocalVelocity.z);
-        transform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
-    }
-
-    void checkGroundStatus()
-    {
-        RaycastHit hitInfo;
-        if (Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, out hitInfo))
+        switch (aAnimation)
         {
-            m_GroundNormal = hitInfo.normal;
-            m_Animator.applyRootMotion = true;
+            case PlayerAnimation.COMMAND:
+                m_Animator.SetBool(ConstValues.PLAYER_ANIMATION_COMMAND, true);
+                break;
+            
+            case PlayerAnimation.DEATH:
+                m_Animator.SetBool(ConstValues.PLAYER_ANIMATION_DEATH, true);
+                break;
+            
+            case PlayerAnimation.FALL:
+                m_Animator.SetBool(ConstValues.PLAYER_ANIMATION_FALL, true);
+                break;
+            
+            default:
+                Debug.Log("Invalid animation enum.");
+                break;
         }
+    }
+
+    public void ResetAnimationState()
+    {
+        PlayAnimation(PlayerAnimation.COMMAND, false);
+        PlayAnimation(PlayerAnimation.DEATH, false);
+        PlayAnimation(PlayerAnimation.FALL, false);
     }
 }
