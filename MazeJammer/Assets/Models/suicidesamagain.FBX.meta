@@ -1,0 +1,193 @@
+fileFormatVersion: 2
+guid: 5808f4e0ceeee0e4bb725f25a715c85c
+timeCreated: 1435502555
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Base Human001
+    100002: Base HumanLCalf001
+    100004: Base HumanLCollarbone001
+    100006: Base HumanLForearm001
+    100008: Base HumanLPlatform001
+    100010: Base HumanLThigh001
+    100012: Base HumanLUpperarm001
+    100014: Base HumanPelvis001
+    100016: Base HumanRCalf001
+    100018: Base HumanRCollarbone002
+    100020: Base HumanRForearm002
+    100022: Base HumanRibcage001
+    100024: Base HumanRPlatform001
+    100026: Base HumanRThigh001
+    100028: Base HumanRUpperarm002
+    100030: Base HumanSpine005
+    100032: Base HumanSpine006
+    100034: Base HumanSpine007
+    100036: Base HumanSpine008
+    100038: Sphere003
+    100040: //RootNode
+    400000: Base Human001
+    400002: Base HumanLCalf001
+    400004: Base HumanLCollarbone001
+    400006: Base HumanLForearm001
+    400008: Base HumanLPlatform001
+    400010: Base HumanLThigh001
+    400012: Base HumanLUpperarm001
+    400014: Base HumanPelvis001
+    400016: Base HumanRCalf001
+    400018: Base HumanRCollarbone002
+    400020: Base HumanRForearm002
+    400022: Base HumanRibcage001
+    400024: Base HumanRPlatform001
+    400026: Base HumanRThigh001
+    400028: Base HumanRUpperarm002
+    400030: Base HumanSpine005
+    400032: Base HumanSpine006
+    400034: Base HumanSpine007
+    400036: Base HumanSpine008
+    400038: Sphere003
+    400040: //RootNode
+    4300000: Sphere003
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Sphere003
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 50
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base Human001
+        weight: 1
+      - path: Base HumanLPlatform001
+        weight: 1
+      - path: Base HumanPelvis001
+        weight: 1
+      - path: Base HumanPelvis001/Base HumanLThigh001
+        weight: 1
+      - path: Base HumanPelvis001/Base HumanLThigh001/Base HumanLCalf001
+        weight: 1
+      - path: Base HumanPelvis001/Base HumanRThigh001
+        weight: 1
+      - path: Base HumanPelvis001/Base HumanRThigh001/Base HumanRCalf001
+        weight: 1
+      - path: Base HumanPelvis001/Base HumanSpine005
+        weight: 1
+      - path: Base HumanPelvis001/Base HumanSpine005/Base HumanSpine006
+        weight: 1
+      - path: Base HumanPelvis001/Base HumanSpine005/Base HumanSpine006/Base HumanSpine007
+        weight: 1
+      - path: Base HumanPelvis001/Base HumanSpine005/Base HumanSpine006/Base HumanSpine007/Base
+          HumanSpine008
+        weight: 1
+      - path: Base HumanPelvis001/Base HumanSpine005/Base HumanSpine006/Base HumanSpine007/Base
+          HumanSpine008/Base HumanRibcage001
+        weight: 1
+      - path: Base HumanPelvis001/Base HumanSpine005/Base HumanSpine006/Base HumanSpine007/Base
+          HumanSpine008/Base HumanRibcage001/Base HumanLCollarbone001
+        weight: 1
+      - path: Base HumanPelvis001/Base HumanSpine005/Base HumanSpine006/Base HumanSpine007/Base
+          HumanSpine008/Base HumanRibcage001/Base HumanLCollarbone001/Base HumanLUpperarm001
+        weight: 1
+      - path: Base HumanPelvis001/Base HumanSpine005/Base HumanSpine006/Base HumanSpine007/Base
+          HumanSpine008/Base HumanRibcage001/Base HumanLCollarbone001/Base HumanLUpperarm001/Base
+          HumanLForearm001
+        weight: 1
+      - path: Base HumanPelvis001/Base HumanSpine005/Base HumanSpine006/Base HumanSpine007/Base
+          HumanSpine008/Base HumanRibcage001/Base HumanRCollarbone002
+        weight: 1
+      - path: Base HumanPelvis001/Base HumanSpine005/Base HumanSpine006/Base HumanSpine007/Base
+          HumanSpine008/Base HumanRibcage001/Base HumanRCollarbone002/Base HumanRUpperarm002
+        weight: 1
+      - path: Base HumanPelvis001/Base HumanSpine005/Base HumanSpine006/Base HumanSpine007/Base
+          HumanSpine008/Base HumanRibcage001/Base HumanRCollarbone002/Base HumanRUpperarm002/Base
+          HumanRForearm002
+        weight: 1
+      - path: Base HumanRPlatform001
+        weight: 1
+      - path: Sphere003
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
