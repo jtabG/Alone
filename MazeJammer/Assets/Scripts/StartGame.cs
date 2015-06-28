@@ -1,20 +1,18 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class StartGame : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
+	public Button startGame;
+
+	void Start () 
+	{
+		startGame = startGame.GetComponent<Button> ();
 	}
 	
-	// Update is called once per frame
-	void Update () 
+	public void newGamePress()
 	{
-		if (Input.GetMouseButtonDown(0)) 
-		{
-			Application.LoadLevel (1);
-		}
-
+		Application.LoadLevel (1);
 	}
 }
