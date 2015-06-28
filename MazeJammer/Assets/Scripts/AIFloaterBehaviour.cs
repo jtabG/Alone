@@ -28,8 +28,12 @@ public class AIFloaterBehaviour : MonoBehaviour, IAIBehaviour
 	void Update ()
     {
         UpdatePostionRotation();
-        CheckForTraps();
 	}
+
+    void FixedUpdate()
+    {
+        CheckForTraps();
+    }
 
     private void UpdatePostionRotation()
     {
@@ -61,10 +65,11 @@ public class AIFloaterBehaviour : MonoBehaviour, IAIBehaviour
         
         while (i < hitColliders.Length)
         {
-            
-            //if (hitColliders[i].GetComponent(typeof()))
-            
-                
+            ITrap foundTrap = hitColliders[i].GetComponent(typeof(ITrap)) as ITrap;
+            if (foundTrap != null)
+            {
+                foundTrap.TrapDetected();
+            }
                 
             i++;
         }
