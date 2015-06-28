@@ -61,3 +61,10 @@ public class ConstValues
 
     #endregion
 }
+
+public enum LevelEnum
+{
+    LEVEL1 = 1,
+    LEVEL2 = 2,
+    LEVEL3 = 3
+}

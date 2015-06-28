@@ -18,10 +18,16 @@ public class GameController : MonoBehaviour
 
     private GameObject m_ActivePlayer;
 
+    public LevelEnum m_CurrentLevel;
+
+    [SerializeField]
+    private GameStats m_GameStats;
 
 
     void Start()
     {
+        m_GameStats = GameObject.FindGameObjectWithTag("GameStats").GetComponent<GameStats>();
+
         if (m_PlayerPrefab != null)
         {
             m_ActivePlayer = Instantiate(m_PlayerPrefab);
@@ -66,5 +72,20 @@ public class GameController : MonoBehaviour
     public GameObject GetPlayerReference()
     {
         return m_ActivePlayer;
+    }
+
+    public GameStats.levelStats getLevel()
+    {
+        switch (m_CurrentLevel)
+        {
+            case LevelEnum.LEVEL1:
+                return m_GameStats.Level1;
+            case LevelEnum.LEVEL2:
+                return m_GameStats.Level2;
+            case LevelEnum.LEVEL3:
+                return m_GameStats.Level3;
+            default:
+                return null;
+        }
     }
 }
