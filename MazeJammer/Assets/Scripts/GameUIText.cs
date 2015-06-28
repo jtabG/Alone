@@ -14,7 +14,7 @@ public class GameUIText : MonoBehaviour
     [SerializeField]
     private GameController m_GameManager;
     [SerializeField]
-    private GameStats.levelStats m_LevelStats;
+    private GameStats m_GameStats;
 
     private int m_Minutes;
     private int m_Seconds;
@@ -22,10 +22,10 @@ public class GameUIText : MonoBehaviour
 	void Start () 
     {
         m_GameManager = GameObject.Find("GameManager").GetComponent<GameController>();
-        m_LevelStats = m_GameManager.getLevel();
+        m_GameStats = GameObject.FindGameObjectWithTag("GameStats").GetComponent<GameStats>();
 
         if (m_GameManager == null ||
-            m_LevelStats == null ||
+            m_GameStats == null ||
             m_DeathCounterText == null ||
             m_LevelText == null ||
             m_TimerText == null)
@@ -51,6 +51,6 @@ public class GameUIText : MonoBehaviour
 
     void updateDeathCounter()
     {
-        m_DeathCounterText.text = m_LevelStats.CurrentNumberDeaths.ToString("00");
+        m_DeathCounterText.text = "DEATHS : " + m_GameManager.getLevel().CurrentNumberDeaths.ToString("00");
     }
 }

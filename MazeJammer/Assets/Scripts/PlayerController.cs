@@ -35,8 +35,18 @@ public class PlayerController : MonoBehaviour
 
     private GameController m_GameController;
 
+    // effect statistics
+    [SerializeField]
+    private GameStats m_GameStats;
+
 	void Start () 
     {
+        m_GameStats = GameObject.FindGameObjectWithTag("GameStats").GetComponent<GameStats>();
+        if (m_GameStats == null)
+        {
+            Debug.LogWarning("GameStats is null");
+        }
+
         if (m_Animator == null)
         {
             m_Animator = GetComponent<Animator>();
@@ -119,6 +129,9 @@ public class PlayerController : MonoBehaviour
     {
         PlayAnimation(PlayerAnimation.DEATH, true);
         StartCoroutine(RespawnDelay(m_RespawnTime));
+        m_GameController.resetLevel();
+        m_GameController.getLevel().CurrentNumberDeaths++;
+        m_GameStats.TotalDeaths++;
     }
 
     public void ResetAnimationState()

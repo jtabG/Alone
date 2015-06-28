@@ -23,9 +23,14 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private GameStats m_GameStats;
 
+    [SerializeField]
+    private GameObject m_Level;
+    private ITrap[] m_LevelTraps;
+
 
     void Start()
     {
+        m_LevelTraps = m_Level.GetComponentsInChildren<ITrap>();
         m_GameStats = GameObject.FindGameObjectWithTag(ConstValues.GAMESTATS_TAG).GetComponent<GameStats>();
 
         if (m_PlayerPrefab != null)
@@ -91,6 +96,17 @@ public class GameController : MonoBehaviour
                 return m_GameStats.Level3;
             default:
                 return null;
+        }
+    }
+
+    public void resetLevel()
+    {
+        //getLevel().CurrentNumberDeaths = 0;
+        getLevel().TimeToCompleteLevel = 0.0f;
+
+        foreach( ITrap trap in m_LevelTraps )
+        {
+            trap.ResetTraps();
         }
     }
 }
