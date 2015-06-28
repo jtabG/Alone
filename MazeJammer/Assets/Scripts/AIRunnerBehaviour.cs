@@ -35,6 +35,6 @@ public class AIRunnerBehaviour : MonoBehaviour, IAIBehaviour
 
     public void UpdateState()
     {
-        throw new System.NotImplementedException();
+        
     }
 }
