@@ -118,4 +118,9 @@ public class PitfallTrapBehaviour : MonoBehaviour , ITrap
     {
         return transform.position;
     }
+
+    public TrapState GetTrapState()
+    {
+        return m_State;
+    }
 }

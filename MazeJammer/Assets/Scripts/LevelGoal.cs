@@ -15,5 +15,11 @@ public class LevelGoal : MonoBehaviour
         }
 	}
 
-
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(ConstValues.PLAYER_TAG))
+        {
+            Debug.Log("Win!");
+        }
+    }
 }

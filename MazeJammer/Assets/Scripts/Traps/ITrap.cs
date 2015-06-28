@@ -9,4 +9,5 @@ public interface ITrap
     void ResetTraps();
 
     Vector3 GetWorldPosition();
+    TrapState GetTrapState();
 }

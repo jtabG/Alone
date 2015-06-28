@@ -154,4 +154,9 @@ public class SpikeTrapBehaviour : MonoBehaviour, ITrap
     {
         return transform.position;
     }
+
+    public TrapState GetTrapState()
+    {
+        return m_State;
+    }
 }

@@ -79,6 +79,7 @@ public class AIRunnerBehaviour : MonoBehaviour, IAIBehaviour
 
             moveTowardsDirection(direction);
         }
+
     }
 
     private void moveTowardsDirection(Vector3 aTargetDireciton)
@@ -105,6 +106,12 @@ public class AIRunnerBehaviour : MonoBehaviour, IAIBehaviour
             ITrap foundTrap = hitColliders[i].GetComponent(typeof(ITrap)) as ITrap;
             if (foundTrap != null)
             {
+                if (foundTrap.GetTrapState() != TrapState.IDLE)
+                {
+                    i++;
+                    continue;
+                }
+
                 float distanceToTrap = (foundTrap.GetWorldPosition() - transform.position).sqrMagnitude;
 
                 if (distanceToTrap < distanceToClosestTrap)

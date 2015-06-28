@@ -125,4 +125,9 @@ public class FireTrapBehaviour : MonoBehaviour , ITrap
     {
         return transform.position;
     }
+
+    public TrapState GetTrapState()
+    {
+        return m_State;
+    }
 }
