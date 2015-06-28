@@ -1,8 +1,43 @@
 ﻿using UnityEngine;
 using System.Collections;
+using LitJson;
+using System.Collections.Generic;
 
 public class GameStats : MonoBehaviour 
 {
+    private void ReadStatistics()
+    {
+        BrainCloudWrapper.GetBC().PlayerStatisticsService.ReadAllPlayerStats(StatsSuccess_Callback, StatsFailure_Callback, null);
+    }
+
+    private void SaveStatisticsToBrainCloud()
+    {
+        Dictionary<string, object> stats = new Dictionary<string, object>{
+            {"timeToCompleteLevel1", m_Level1.TimeToCompleteLevel},
+            {"totalNumberDeaths", m_TotalDeaths},
+            {"numberDeathsLevel1", m_Level1.NumberDeaths}
+        };
+
+        BrainCloudWrapper.GetBC().PlayerStatisticsService.IncrementPlayerStats(stats, StatsSuccess_Callback, StatsFailure_Callback, null);
+
+        //brainCloudstatusText
+    }
+
+    private void StatsSuccess_Callback(string responseData, object cbObject)
+    {
+        JsonData jsonData = JsonMapper.ToObject(responseData);
+        JsonData entries = jsonData["data"]["statistics"];
+
+        m_Level1.TimeToCompleteLevel = int.Parse(entries["timeToCompleteLevel1"].ToString());
+        m_Level1.NumberDeaths = int.Parse(entries["numberDeathsLevel1"].ToString());
+        m_TotalDeaths = int.Parse(entries["totalNumberDeaths"].ToString());      
+    }
+
+    private void StatsFailure_Callback(int statusCode, int reasonCode, string statusMessage, object cbObject)
+    {
+        Debug.Log("Failure to save stats");
+    }
+
     public class levelStats
     {
         private float m_TimeToCompleteLevel = 0.0f;
@@ -39,6 +74,13 @@ public class GameStats : MonoBehaviour
     private levelStats m_Level2;
     private levelStats m_Level3;
 
+    private int m_TotalDeaths;
+    public int TotalDeaths
+    {
+        get { return m_TotalDeaths; }
+        set { m_TotalDeaths = value; }
+    }
+
     public void incrementDeath(levelStats level)
     {
         level.NumberDeaths++;
@@ -70,9 +112,12 @@ public class GameStats : MonoBehaviour
 
     void Start()
     {
+        m_Level1 = new levelStats();
+        Debug.Log("ahhh");
         if (m_Level1 == null)
         {
             m_Level1 = new levelStats();
+            Debug.Log("not null bitch");
         }
         if (m_Level2 == null)
         {

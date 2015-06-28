@@ -16,7 +16,6 @@ public class GameUIText : MonoBehaviour
     {
         m_DisplayText = GetComponent<Text>();
         m_GameManager = GameObject.Find("GameManager").GetComponent<GameController>();
-        m_LevelStats = m_GameManager.getLevel();
 	}
 
 	void Update () 
