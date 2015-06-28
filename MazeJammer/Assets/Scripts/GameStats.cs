@@ -8,8 +8,6 @@ public class GameStats : MonoBehaviour
     public void ReadStatistics()
     {
         BrainCloudWrapper.GetBC().PlayerStatisticsService.ReadAllPlayerStats(StatsSuccess_Callback, StatsFailure_Callback, null);
-
-
     }
 
     public void SaveStatisticsToBrainCloud()
@@ -21,8 +19,6 @@ public class GameStats : MonoBehaviour
         };
 
         BrainCloudWrapper.GetBC().PlayerStatisticsService.IncrementPlayerStats(stats, StatsSuccess_Callback, StatsFailure_Callback, null);
-
-        //brainCloudstatusText
     }
 
     private void StatsSuccess_Callback(string responseData, object cbObject)

@@ -18,9 +18,7 @@ public class DisplayPlayerStats : MonoBehaviour
         {
             Debug.Log("GameStats is NULL!");
         }
-        m_GameStats.ReadStatistics();
-
-        
+        m_GameStats.ReadStatistics();      
 	}
 
 	void Update () 
