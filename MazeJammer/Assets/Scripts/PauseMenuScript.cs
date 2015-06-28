@@ -7,7 +7,6 @@ public class PauseMenuScript : MonoBehaviour {
 	public Canvas pauseMenu;
 	public Button resumeGame;
 	public Button exit;
-	private bool isShowing;
 
 	// Use this for initialization
 	void Start () 
@@ -33,10 +32,9 @@ public class PauseMenuScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetKeyDown("escape")) {
-			isShowing = !isShowing;
+		if (Input.GetKeyDown ("escape")) {
 			pauseMenu.enabled = true;
 			Time.timeScale = 0;
-		}
+		} 
 	}
 }
