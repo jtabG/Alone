@@ -52,6 +52,7 @@ public class ConstValues
 
 
     public const string AI_RUNNER_TAG = "Runner";
+    public const string GAMESTATS_TAG = "GameStats";
     #endregion
 
     #region NUMERICAL

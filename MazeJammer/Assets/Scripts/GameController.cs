@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        m_GameStats = GameObject.FindGameObjectWithTag("GameStats").GetComponent<GameStats>();
+        m_GameStats = GameObject.FindGameObjectWithTag(ConstValues.GAMESTATS_TAG).GetComponent<GameStats>();
 
         if (m_PlayerPrefab != null)
         {
