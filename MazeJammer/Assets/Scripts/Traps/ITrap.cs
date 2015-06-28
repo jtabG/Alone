@@ -5,7 +5,6 @@ public interface ITrap
 {
 
     void OnTriggerEnter();
-
-
+    void TrapDetected();
 
 }
