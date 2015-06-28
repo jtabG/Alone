@@ -20,12 +20,12 @@ public class NewGameScript : MonoBehaviour {
 
 	public void newGamePress()
 	{
-		Application.LoadLevel (3);
+		Application.LoadLevel (2);
 	}
 
 	public void viewControls()
 	{
-		Application.LoadLevel (2);
+		Application.LoadLevel (1);
 	}
 
 	// Update is called once per frame

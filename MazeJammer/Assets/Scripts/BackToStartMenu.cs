@@ -9,7 +9,7 @@ public class BackToStartMenu : MonoBehaviour {
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.Escape)) 
 		{
-			Application.LoadLevel (1);
+			Application.LoadLevel (0);
 		}
 	}
 }
