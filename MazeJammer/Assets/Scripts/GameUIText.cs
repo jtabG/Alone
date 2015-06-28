@@ -18,17 +18,17 @@ public class GameUIText : MonoBehaviour
 
 	void Start () 
     {
-       
         m_GameManager = GameObject.Find("GameManager").GetComponent<GameController>();
+        m_LevelStats = m_GameManager.getLevel();
 	}
 
 	void Update () 
     {
-        int level = (int)m_GameManager.m_CurrentLevel;
-        if (m_GameManager == null)
-        {
-            level = 1;
-        }
-        m_DisplayText.text = "Level" + level.ToString("00");
+
 	}
+
+    void updateTimer()
+    {
+
+    }
 }
