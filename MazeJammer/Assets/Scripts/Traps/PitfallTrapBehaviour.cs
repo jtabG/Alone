@@ -49,7 +49,6 @@ public class PitfallTrapBehaviour : MonoBehaviour , ITrap
                 m_Parent.GetComponent<MeshRenderer>().enabled = false;
                 m_Parent.GetComponent<BoxCollider>().enabled = false;
                 m_State = TrapState.DISABLED;
-                Debug.Log(m_State);
                 break;
             case TrapState.DISABLED:
                 // Pitfall forever
@@ -57,6 +56,8 @@ public class PitfallTrapBehaviour : MonoBehaviour , ITrap
             case TrapState.IDLE:
                 break;
             case TrapState.RESETTING:
+                m_Parent.GetComponent<MeshRenderer>().enabled = true;
+                m_Parent.GetComponent<BoxCollider>().enabled = true;
                 m_State = TrapState.IDLE;
                 break;
             case TrapState.TRIGGERED:
