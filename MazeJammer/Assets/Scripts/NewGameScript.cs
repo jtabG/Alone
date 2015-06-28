@@ -9,6 +9,15 @@ public class NewGameScript : MonoBehaviour {
 	public Button howToPlay;
 	public Button leaderboards;
 
+    [SerializeField]
+    private string Level1;
+    [SerializeField]
+    private string PauseMenu;
+    [SerializeField]
+    private string HowToPlay;
+    [SerializeField]
+    private string Leaderboard;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -20,19 +29,19 @@ public class NewGameScript : MonoBehaviour {
 
 	public void newGamePress()
 	{
-		Application.LoadLevel (2);
+		Application.LoadLevel (Level1);
 	}
 
 	public void viewControls()
 	{
-		Application.LoadLevel (1);
+		Application.LoadLevel (HowToPlay);
 	}
 
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.Escape)) 
 		{
-			Application.LoadLevel (0);
+			Application.LoadLevel (PauseMenu);
 		}
 	}
 }
