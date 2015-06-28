@@ -5,8 +5,10 @@ public class LevelGoal : MonoBehaviour
 {
     private GameStats m_GameStats;
 
+    [SerializeField]
+    private ParticleSystem m_Particles;
 
-	// Use this for initialization
+
 	void Start ()
     {
 	    if (m_GameStats == null)
@@ -20,6 +22,12 @@ public class LevelGoal : MonoBehaviour
         if (other.CompareTag(ConstValues.PLAYER_TAG))
         {
             Debug.Log("Win!");
+            if (m_Particles != null)
+            {
+                m_Particles.Play();
+            }
+
+            
         }
     }
 }
