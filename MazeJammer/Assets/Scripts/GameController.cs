@@ -43,7 +43,7 @@ public class GameController : MonoBehaviour
             m_AIController.GameController = this;
 
             m_AIController.SpawnCreature(AIType.FLOATY_FRED, ConstValues.FLOATY_FRED_MAX_COUNT);
-            //m_AIController.SpawnCreature(AIType.SUICIDE_SAM, ConstValues.SUICIDE_SAM_MAX_COUNT);
+            m_AIController.SpawnCreature(AIType.SUICIDE_SAM, ConstValues.SUICIDE_SAM_MAX_COUNT);
         }
     }
 
